@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 require './lib/checkout'
 
 RSpec.describe Checkout do
