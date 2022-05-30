@@ -104,14 +104,6 @@ checkout.total
 - [Simplecov](https://github.com/simplecov-ruby/simplecov)
 - [Github Workflows](https://docs.github.com/en/actions/using-workflows)
 
-## What you should know
-
-- Your code goes inside the lib folder
-- Remember to do your code in small chunks
-- Remember to test your code
-- Remember clean code and SOLID principles
-- Remember to open Pull Requests with your features isolated
-
 ## Commands
 
 ### Installation
