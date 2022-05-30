@@ -39,7 +39,7 @@ module Rules
         [Item.new(code: 10, name: 'coffee', price: 60.01)]
       end
 
-      it 'the value of the discount to be reduced from the total' do
+      it 'returns the value of the discount to be reduced from the total' do
         expect(subject.discount).to eq(6.0)
       end
     end
