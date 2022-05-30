@@ -24,6 +24,8 @@ AllCops:
     - 'bin/**/*'
     - 'spec/**/*'
 
+Style/NumericLiteralPrefix:
+  Enabled: false
 
 Gemspec/DateAssignment:
   Enabled: true
