@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require 'item_storage'
+require_relative 'rules/bulk_discount'
+require_relative 'rules/discount'
+require_relative 'item_storage'
 
 class Checkout
   def initialize(rules = [])

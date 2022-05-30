@@ -1,5 +1,3 @@
-require './lib/rules/bulk_discount.rb'
-require './lib/rules/discount'
 require './lib/checkout'
 
 RSpec.describe Checkout do
