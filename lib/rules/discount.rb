@@ -16,7 +16,7 @@ module Rules
     def discount
       return 0 unless eligible?
 
-      (total * TEN_PERCENT).round(2)
+      (total * TEN_PERCENT)
     end
 
     private

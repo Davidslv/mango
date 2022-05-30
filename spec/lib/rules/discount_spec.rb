@@ -40,7 +40,7 @@ module Rules
       end
 
       it 'returns the value of the discount to be reduced from the total' do
-        expect(subject.discount).to eq(6.0)
+        expect(subject.discount).to eq(6.001)
       end
     end
   end
