@@ -44,6 +44,57 @@ Basket: 001,002,001,003
 Total price expected: £73.76
 ```
 
+## Usage
+
+Test data 1
+
+```
+$ irb -r ./lib/checkout.rb
+
+rules = [Rules::BulkDiscount, Rules::Discount]
+checkout = Checkout.new(rules)
+
+checkout.scan(001)
+checkout.scan(002)
+checkout.scan(003)
+
+checkout.total
+
+=> 66.78
+```
+
+Test data 2
+
+```
+rules = [Rules::BulkDiscount, Rules::Discount]
+checkout = Checkout.new(rules)
+
+checkout.scan(001)
+checkout.scan(003)
+checkout.scan(001)
+
+checkout.total
+
+=> 36.95
+```
+
+Test data 3
+
+
+```
+rules = [Rules::BulkDiscount, Rules::Discount]
+checkout = Checkout.new(rules)
+
+checkout.scan(001)
+checkout.scan(002)
+checkout.scan(001)
+checkout.scan(003)
+
+checkout.total
+
+=> 73.61
+```
+
 
 ## What is provided
 

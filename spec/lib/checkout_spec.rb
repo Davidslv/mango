@@ -23,4 +23,54 @@ RSpec.describe Checkout do
       end
     end
   end
+
+  describe '#total' do
+    context 'when there are no pricing rules' do
+      it 'returns the total without discounts' do
+        checkout = described_class.new
+        checkout.scan(001)
+        checkout.scan(002)
+        checkout.scan(003)
+
+        expect(checkout.total).to eq(74.20)
+      end
+    end
+
+    context 'when there are princing rules' do
+      let(:subject) { described_class.new(rules) }
+      let(:rules) do
+        [
+          Rules::Discount,
+          Rules::BulkDiscount,
+        ]
+      end
+
+      it 'calculates the total with the 10% discount' do
+        subject.scan(001)
+        subject.scan(002)
+        subject.scan(003)
+
+        expect(subject.total).to eq(66.78)
+      end
+
+      it 'calculates the total with bulk discount' do
+        subject.scan(001)
+        subject.scan(003)
+        subject.scan(001)
+
+        expect(subject.total).to eq(36.95)
+      end
+
+      it 'calculates the total with bulk discount and 10% discount' do
+        subject.scan(001)
+        subject.scan(002)
+        subject.scan(001)
+        subject.scan(003)
+
+        # total - 10%   - bulk
+        # 83.45 - 8.345 - 1.50 = 73.605
+        expect(subject.total).to eq(73.61)
+      end
+    end
+  end
 end

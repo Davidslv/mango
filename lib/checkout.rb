@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require 'item_storage'
+require_relative 'rules/bulk_discount'
+require_relative 'rules/discount'
+require_relative 'item_storage'
 
 class Checkout
   def initialize(rules = [])
@@ -15,5 +17,17 @@ class Checkout
 
     @basket << item
     true
+  end
+
+  def total
+    total = @basket.sum(&:price)
+
+    @rules.each do |rule|
+      rule = rule.new(@basket)
+
+      total -= rule.discount
+    end
+
+    total.round(2)
   end
 end
