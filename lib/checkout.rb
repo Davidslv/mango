@@ -23,7 +23,7 @@ class Checkout
     total = @basket.sum(&:price)
 
     @rules.each do |rule|
-      rule = rule.new(@basket)
+      rule = rule.new(@basket, total)
 
       total -= rule.discount
     end

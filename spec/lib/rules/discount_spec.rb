@@ -3,8 +3,9 @@ require './lib/rules/discount'
 
 module Rules
   RSpec.describe Discount do
-    subject { described_class.new(basket) }
+    subject { described_class.new(basket, total) }
     let(:basket) { [] }
+    let(:total) { basket.sum(&:price) }
 
     describe '#eligible?' do
       context 'when basket is empty' do
