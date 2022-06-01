@@ -92,7 +92,7 @@ checkout.scan(003)
 
 checkout.total
 
-=> 73.61
+=> 73.76
 ```
 
 
