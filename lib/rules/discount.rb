@@ -5,24 +5,19 @@ module Rules
     TEN_PERCENT = 0.10
     MINIMUM_SPENT = 60
 
-    def initialize(basket)
+    def initialize(basket, total)
       @basket = basket
+      @total = total
     end
 
     def eligible?
-      total > MINIMUM_SPENT
+      @total > MINIMUM_SPENT
     end
 
     def discount
       return 0 unless eligible?
 
-      (total * TEN_PERCENT)
-    end
-
-    private
-
-    def total
-      @basket.sum(&:price)
+      (@total * TEN_PERCENT)
     end
   end
 end

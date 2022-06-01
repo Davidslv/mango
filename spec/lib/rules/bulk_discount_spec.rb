@@ -3,7 +3,7 @@ require './lib/rules/bulk_discount'
 
 module Rules
   RSpec.describe BulkDiscount do
-    subject { described_class.new(basket) }
+    subject { described_class.new(basket, nil) }
     let(:basket) { [] }
 
     describe '#eligible?' do

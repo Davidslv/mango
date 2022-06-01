@@ -5,7 +5,7 @@ module Rules
     ELIGIBLE_ITEM_CODE = 001
     PRICE_REDUCTION = 0.75
 
-    def initialize(basket)
+    def initialize(basket, _total)
       @basket = basket
     end
 

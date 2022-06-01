@@ -40,8 +40,8 @@ RSpec.describe Checkout do
       let(:subject) { described_class.new(rules) }
       let(:rules) do
         [
-          Rules::Discount,
           Rules::BulkDiscount,
+          Rules::Discount,
         ]
       end
 
@@ -67,9 +67,7 @@ RSpec.describe Checkout do
         subject.scan(001)
         subject.scan(003)
 
-        # total - 10%   - bulk
-        # 83.45 - 8.345 - 1.50 = 73.605
-        expect(subject.total).to eq(73.61)
+        expect(subject.total).to eq(73.76)
       end
     end
   end
