@@ -8,7 +8,7 @@ module Rules
       @price_reduction = price_reduction
     end
 
-    def discount(basket:, total: nil)
+    def discount(basket, _total)
       return 0 unless eligible?(basket)
 
       count_eligible_item(basket) * @price_reduction

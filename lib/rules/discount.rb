@@ -7,7 +7,7 @@ module Rules
       @minimum_spent = minimum_spent
     end
 
-    def discount(total:, basket: nil)
+    def discount(_basket, total)
       return 0 unless eligible?(total)
 
       (total * @percentage)

@@ -20,7 +20,7 @@ module Rules
 
       it 'returns the value of the discount to be reduced from the total' do
         expect(
-          subject.discount(basket: basket)
+          subject.discount(basket, nil)
         ).to eq(1.50)
       end
 
@@ -28,7 +28,7 @@ module Rules
         let(:basket) { [item] }
 
         it 'returns zero' do
-          expect(subject.discount(basket: basket)).to eq(0)
+          expect(subject.discount(basket, nil)).to eq(0)
         end
       end
 
@@ -36,7 +36,7 @@ module Rules
         let(:basket) { [] }
 
         it 'returns zero' do
-          expect(subject.discount(basket: basket)).to eq(0)
+          expect(subject.discount(basket, nil)).to eq(0)
         end
       end
     end

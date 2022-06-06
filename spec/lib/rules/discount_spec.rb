@@ -18,7 +18,7 @@ module Rules
     describe '#discount' do
       context 'when total is less than minimum spent' do
         it 'returns zero' do
-          expect(subject.discount(total: total)).to eq(0)
+          expect(subject.discount(nil, total)).to eq(0)
         end
       end
 
@@ -29,7 +29,7 @@ module Rules
 
         context 'and basket is not minimum spent' do
           it 'returns zero' do
-            expect(subject.discount(total: total)).to eq(0)
+            expect(subject.discount(nil, total)).to eq(0)
           end
         end
 
@@ -40,7 +40,7 @@ module Rules
           end
 
           it 'returns the value of the discount to be reduced from the total' do
-            expect(subject.discount(total: total)).to eq(9.925)
+            expect(subject.discount(nil, total)).to eq(9.925)
           end
         end
       end
