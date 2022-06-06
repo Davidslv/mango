@@ -51,7 +51,11 @@ Test data 1
 ```
 $ irb -r ./lib/checkout.rb
 
-rules = [Rules::BulkDiscount, Rules::Discount]
+rules = [
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
+  Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
+]
+
 checkout = Checkout.new(rules)
 
 checkout.scan(001)
@@ -66,7 +70,11 @@ checkout.total
 Test data 2
 
 ```
-rules = [Rules::BulkDiscount, Rules::Discount]
+rules = [
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
+  Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
+]
+
 checkout = Checkout.new(rules)
 
 checkout.scan(001)
@@ -82,7 +90,11 @@ Test data 3
 
 
 ```
-rules = [Rules::BulkDiscount, Rules::Discount]
+rules = [
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
+  Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
+]
+
 checkout = Checkout.new(rules)
 
 checkout.scan(001)
