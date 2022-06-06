@@ -40,7 +40,7 @@ RSpec.describe Checkout do
       let(:subject) { described_class.new(rules) }
       let(:bulk_discount_rule) do
         Rules::BulkDiscount.new(
-          item: ItemStorage.new.find(001),
+          item: ItemStorage.find(001),
           minimum_quantity: 2,
           price_reduction: 0.75
         )

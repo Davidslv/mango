@@ -24,7 +24,7 @@ module Rules
 
       context 'when basket is not empty' do
         let(:basket) do
-          [ItemStorage.new.find(001)]
+          [ItemStorage.find(001)]
         end
 
         context 'and basket is not minimum spent' do
@@ -35,8 +35,8 @@ module Rules
 
         context 'and basket is over minimum spent' do
           before do
-            basket << ItemStorage.new.find(002)
-            basket << ItemStorage.new.find(002)
+            basket << ItemStorage.find(002)
+            basket << ItemStorage.find(002)
           end
 
           it 'returns the value of the discount to be reduced from the total' do

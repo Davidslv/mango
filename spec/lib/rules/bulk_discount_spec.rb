@@ -3,7 +3,7 @@ require './lib/rules/bulk_discount'
 
 module Rules
   RSpec.describe BulkDiscount do
-    let(:item) { ItemStorage.new.find(001) }
+    let(:item) { ItemStorage.find(001) }
 
     let(:conditions) do
       {
