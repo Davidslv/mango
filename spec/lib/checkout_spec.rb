@@ -38,11 +38,23 @@ RSpec.describe Checkout do
 
     context 'when there are princing rules' do
       let(:subject) { described_class.new(rules) }
+      let(:bulk_discount_rule) do
+        Rules::BulkDiscount.new(
+          item: ItemStorage.find(001),
+          minimum_quantity: 2,
+          price_reduction: 0.75
+        )
+      end
+
+      let(:discount_rule) do
+        Rules::Discount.new(
+          percentage: 0.10,
+          minimum_spent: 60
+        )
+      end
+
       let(:rules) do
-        [
-          Rules::BulkDiscount,
-          Rules::Discount,
-        ]
+        [ bulk_discount_rule, discount_rule ]
       end
 
       it 'calculates the total with the 10% discount' do

@@ -2,31 +2,30 @@
 
 module Rules
   class BulkDiscount
-    ELIGIBLE_ITEM_CODE = 001
-    PRICE_REDUCTION = 0.75
-
-    def initialize(basket, _total)
-      @basket = basket
+    def initialize(item:, minimum_quantity:, price_reduction:)
+      @item = item
+      @minimum_quantity = minimum_quantity
+      @price_reduction = price_reduction
     end
 
-    def eligible?
-      !!eligible_item && count_eligible_item >= 2
-    end
+    def discount(basket, _total)
+      return 0 unless eligible?(basket)
 
-    def discount
-      return 0 unless eligible?
-
-      count_eligible_item * PRICE_REDUCTION
+      count_eligible_item(basket) * @price_reduction
     end
 
     private
 
-    def eligible_item
-      @basket.find { |item| item.code == ELIGIBLE_ITEM_CODE }
+    def eligible?(basket)
+      eligible_item(basket) && count_eligible_item(basket) >= @minimum_quantity
     end
 
-    def count_eligible_item
-      @basket.count { |item| item.code == ELIGIBLE_ITEM_CODE }
+    def eligible_item(basket)
+      basket.include?(@item)
+    end
+
+    def count_eligible_item(basket)
+      basket.count(@item)
     end
   end
 end
