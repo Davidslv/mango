@@ -21,7 +21,7 @@ Our check-out can scan items in any order, and because our promotions will chang
 
 The interface to our checkout looks like this (shown in Ruby):
 
-```
+```ruby
   co = Checkout.new(promotional_rules)
   co.scan(item)
   co.scan(item)
@@ -46,11 +46,14 @@ Total price expected: £73.76
 
 ## Usage
 
-Test data 1
 
 ```
 $ irb -r ./lib/checkout.rb
+```
 
+### Test data 1
+
+```ruby
 rules = [
   Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
   Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
@@ -67,9 +70,9 @@ checkout.total
 => 66.78
 ```
 
-Test data 2
+### Test data 2
 
-```
+```ruby
 rules = [
   Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
   Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
@@ -86,10 +89,9 @@ checkout.total
 => 36.95
 ```
 
-Test data 3
+### Test data 3
 
-
-```
+```ruby
 rules = [
   Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
   Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
