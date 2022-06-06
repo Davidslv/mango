@@ -2,22 +2,21 @@
 
 module Rules
   class Discount
-    TEN_PERCENT = 0.10
-    MINIMUM_SPENT = 60
-
-    def initialize(basket, total)
-      @basket = basket
-      @total = total
+    def initialize(percentage:, minimum_spent:)
+      @percentage = percentage
+      @minimum_spent = minimum_spent
     end
 
-    def eligible?
-      @total > MINIMUM_SPENT
+    def discount(total:, basket: nil)
+      return 0 unless eligible?(total)
+
+      (total * @percentage)
     end
 
-    def discount
-      return 0 unless eligible?
+    private
 
-      (@total * TEN_PERCENT)
+    def eligible?(total)
+      total > @minimum_spent
     end
   end
 end
