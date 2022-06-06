@@ -4,16 +4,16 @@ require './lib/rules/bulk_discount'
 module Rules
   RSpec.describe BulkDiscount do
     let(:item) { ItemStorage.find(001) }
+    let(:minimum_quantity) { 2 }
+    let(:price_reduction) { 0.75 }
 
-    let(:conditions) do
-      {
+    subject do
+      described_class.new(
         item: item,
-        minimum_quantity: 2,
-        price_reduction: 0.75
-      }
+        minimum_quantity: minimum_quantity,
+        price_reduction: price_reduction
+      )
     end
-
-    subject { described_class.new(conditions) }
 
     describe '#discount' do
       let(:basket) { [item, item] }

@@ -3,14 +3,12 @@ require './lib/rules/discount'
 
 module Rules
   RSpec.describe Discount do
-    subject { described_class.new(conditions) }
-
-    let(:conditions) do
-      {
-        percentage: 0.10,
-        minimum_spent: 60
-      }
+    subject do
+      described_class.new(percentage: percentage, minimum_spent: minimum_spent)
     end
+
+    let(:percentage) { 0.10 }
+    let(:minimum_spent) { 60 }
 
     let(:basket) { [] }
     let(:total) { basket.sum(&:price) }
