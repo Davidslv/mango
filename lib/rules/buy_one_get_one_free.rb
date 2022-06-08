@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
 module Rules
-  class BulkDiscount
-    def initialize(item:, minimum_quantity:, price_reduction:)
+  class BuyOneGetOneFree
+    def initialize(item:, minimum_quantity:)
       @item = item
       @minimum_quantity = minimum_quantity
-      @price_reduction = price_reduction
     end
 
     def discount(basket, _total)
       return 0 unless eligible?(basket)
 
-      count_eligible_item(basket) * @price_reduction
+      (count_eligible_item(basket) / @minimum_quantity) * @item.price
     end
 
     private

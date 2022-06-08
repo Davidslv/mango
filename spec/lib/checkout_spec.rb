@@ -81,6 +81,30 @@ RSpec.describe Checkout do
 
         expect(subject.total).to eq(73.76)
       end
+
+      context 'and there is a new pricing rule for coffee' do
+        let(:buy_one_get_one_free_rule) do
+          Rules::BuyOneGetOneFree.new(
+            item: ItemStorage.find(004),
+            minimum_quantity: 2
+          )
+        end
+
+        let(:rules) do
+          super().append(buy_one_get_one_free_rule)
+        end
+
+        it 'calculates the total with bulk discount, 10% discount and buy-one-get-one-free' do
+          subject.scan(001)
+          subject.scan(002)
+          subject.scan(001)
+          subject.scan(004)
+          subject.scan(003)
+          subject.scan(004)
+
+          expect(subject.total).to eq(83.86)
+        end
+      end
     end
   end
 end

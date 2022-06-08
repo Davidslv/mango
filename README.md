@@ -10,12 +10,14 @@ Our client is an online marketplace, here is a sample of some of the products av
 | 001           | Lavender heart         | £9.25      |
 | 002           | Personalised cufflinks | £45.00     |
 | 003           | Kids T-shirt           | £19.95     |
+| 004           | Coffee                 | £11.23     |
 
 
 Our marketing team want to offer promotions as an incentive for our customers to purchase these items.
 
-If you spend over £60, then you get 10% of your purchase
-If you buy 2 or more lavender hearts then the price drops to £8.50.
+- When people spend over £60, they get 10% of the whole purchase.
+- When people buy 2 or more lavender hearts then the price drops to £8.50.
+- When people buy 2 coffees, they get one for free.
 
 Our check-out can scan items in any order, and because our promotions will change, it needs to be flexible regarding our promotional rules.
 
@@ -42,6 +44,12 @@ Total price expected: £36.95
 
 Basket: 001,002,001,003
 Total price expected: £73.76
+
+Basket: 004,004
+Total price expected: £11.23
+
+Basket: 001,002,001,004,003,004
+Total price expected: £83.86
 ```
 
 ## Usage
@@ -55,7 +63,7 @@ $ irb -r ./lib/checkout.rb
 
 ```ruby
 rules = [
-  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75),
   Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
 ]
 
@@ -74,7 +82,7 @@ checkout.total
 
 ```ruby
 rules = [
-  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75),
   Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
 ]
 
@@ -93,7 +101,7 @@ checkout.total
 
 ```ruby
 rules = [
-  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75),
   Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
 ]
 
@@ -107,6 +115,29 @@ checkout.scan(003)
 checkout.total
 
 => 73.76
+```
+
+### Test data 4
+
+```ruby
+rules = [
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75),
+  Rules::Discount.new(percentage: 0.10, minimum_spent: 60),
+  Rules::BuyOneGetOneFree.new(item: ItemStorage.find(004), minimum_quantity: 2)
+]
+
+checkout = Checkout.new(rules)
+
+subject.scan(001)
+subject.scan(002)
+subject.scan(001)
+subject.scan(004)
+subject.scan(003)
+subject.scan(004)
+
+checkout.total
+
+=> 83.86
 ```
 
 
