@@ -63,7 +63,7 @@ $ irb -r ./lib/checkout.rb
 
 ```ruby
 rules = [
-  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75),
   Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
 ]
 
@@ -82,7 +82,7 @@ checkout.total
 
 ```ruby
 rules = [
-  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75),
   Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
 ]
 
@@ -101,7 +101,7 @@ checkout.total
 
 ```ruby
 rules = [
-  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75), 
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75),
   Rules::Discount.new(percentage: 0.10, minimum_spent: 60)
 ]
 
@@ -115,6 +115,29 @@ checkout.scan(003)
 checkout.total
 
 => 73.76
+```
+
+### Test data 4
+
+```ruby
+rules = [
+  Rules::BulkDiscount.new(item: ItemStorage.find(001), minimum_quantity: 2, price_reduction: 0.75),
+  Rules::Discount.new(percentage: 0.10, minimum_spent: 60),
+  Rules::BuyOneGetOneFree.new(item: ItemStorage.find(004), minimum_quantity: 2)
+]
+
+checkout = Checkout.new(rules)
+
+subject.scan(001)
+subject.scan(002)
+subject.scan(001)
+subject.scan(004)
+subject.scan(003)
+subject.scan(004)
+
+checkout.total
+
+=> 83.86
 ```
 
 
